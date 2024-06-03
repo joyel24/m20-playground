@@ -8,7 +8,7 @@ Log capturé avec le portapack+hackrf :
 																																						      ^ ne fait pas parti de la trame ^
 
 0x00 		[45]			Taile de la trame en hexa 0x45 donc theoriquement 1+69 octets (la m20 est optimisée, les trames sont plus longues sur M10 et autre)
-0x01 		[20]			Identification du modèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
+0x01 		[20]			Identification du medèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
 0x02..0x03 	[0445]										<|
 0x04..0x05 	[EA2C]			Temperature ADC (je crois)	<|  Données de température et humidité apparement mais pas clair sur le code source de radiosonde_auto_rx
 0x06..0x07 	[B201]										<|
@@ -17,7 +17,7 @@ Log capturé avec le portapack+hackrf :
 0x0D..0x0E	[0000]			GNSS vélocité horizontale Y (NORD/SUD)
 0x0F..0x11 	[00EEB8]		GPS TOW (Time of Week) (?)
 0x12..0x14	[9A8C09]		Numero de Serie
-0x15 		[4B]			Compteur
+0x15 		[4B]			CNT resistor temperature I guess
 0x16..0x17 	[0000]			Block check
 0x18..0x19 	[0000]			GNSS vélocité verticale
 0x1A..0x1B 	[08D4]			GPS week (?)
