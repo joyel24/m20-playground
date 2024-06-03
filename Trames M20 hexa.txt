@@ -1,0 +1,49 @@
+https://cyberchef.org  <- Outil puissant de conversion de données et d'encodage/decodage (hex bin dec oct exif html unix braille base32..base85 XOR AES SHA0..SHA3 etc.)
+
+Log capturé avec le portapack+hackrf :
+
+45200445EA2CB201F2C0000000000000EEB89A8C094B0000000008D402AC512B000DD697563F993A00000000013204F64BCA0813350200005125465C002000100056F806243D000000000000000000000000000000000000
+
+45 20 0445 EA2C B201 F2C000 0000 0000 00EEB8 9A8C09 4B 0000 0000 08D4 02AC512B 000DD697 563F993A00000000013204F64BCA0813350200005125465C002000100056F806243D 000000000000000000000000000000000000
+																																						      ^ ne fait pas parti de la trame ^
+
+0x00 		[45]			Taile de la trame en hexa 0x45 donc theoriquement 1+69 octets (la m20 est optimisée, les trames sont plus longues sur M10 et autre)
+0x01 		[20]			Identification du medèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
+0x02..0x03 	[0445]										<|
+0x04..0x05 	[EA2C]			Temperature ADC (je crois)	<|  Données de température et humidité apparement mais pas clair sur le code source de radiosonde_auto_rx
+0x06..0x07 	[B201]										<|
+0x08..0x0A 	[F2C000]		GNSS altitude
+0x0B..0x0C 	[0000]			GNSS vélocité horizontale X (EST/OUEST)
+0x0D..0x0E	[0000]			GNSS vélocité horizontale Y (NORD/SUD)
+0x0F..0x11 	[00EEB8]		GPS TOW (Time of Week) (?)
+0x12..0x14	[9A8C09]		Numero de Serie
+0x15 		[4B]			Compteur
+0x16..0x17 	[0000]			Block check
+0x18..0x19 	[0000]			GNSS vélocité verticale
+0x1A..0x1B 	[08D4]			GPS week (?)
+0x1C..0x1F 	[02AC512B]		GNSS latitude
+0x20..0x23 	[000DD697]		GNSS longitude
+0x24..0x43	[563F993A00000000013204F64BCA0813350200005125465C002000100056F806] (?)
+0x44..0x45	[243D] 			Frame check (sorte de checksum je pense)
+
+
+----------------------------------------------
+J'ai compris comment convertir les coordonées lon./lat. : 
+
+0x1C..0x1F 	[02AC512B]		GNSS latitude
+0x20..0x23 	[000DD697]		GNSS longitude
+
+02AC512B -> 00000010101011000101000100101011 -> 44847403 /1e6 -> 44.847403
+000DD697 -> 00000000000011011101011010010111 ->	906903   /1e6 -> 0.906903
+
+
+Prenons les coordonées du club pour tester l'inverse: 43.550014, 5.030089
+
+43550014 -> 00000010100110001000010100111110 -> 0298853E
+5030089  -> 00000000010011001100000011001001 -> 004CC0C9
+
+Théoriquement pour F4KKF ça devrait donner à peu près : 
+
+0x1C..0x1F 	[0298853E]		GNSS latitude
+0x20..0x23 	[004CC0C9]		GNSS longitude
+----------------------------------------------
