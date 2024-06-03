@@ -11,7 +11,7 @@ Log capturé avec le portapack+hackrf :
 0x01 		[20]			Identification du medèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
 0x02..0x03 	[0445]			ADC Relative Humidity - (ne555 clock circuit)		<|
 0x04..0x05 	[EA2C]			Temperature ADC (je crois)				<|  Données de température et humidité apparement mais pas clair sur le code source de radiosonde_auto_rx
-0x06..0x07 	[B201]			ADC RH-Temperature (don't know what it means)		<|
+0x06..0x07 	[B201]			ADC RH-Temperature (probably temp+rh)			<|
 0x08..0x0A 	[F2C000]		GNSS altitude
 0x0B..0x0C 	[0000]			GNSS vélocité horizontale X (EST/OUEST)
 0x0D..0x0E	[0000]			GNSS vélocité horizontale Y (NORD/SUD)
