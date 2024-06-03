@@ -8,7 +8,7 @@ Log capturé avec le portapack+hackrf :
 																																						      ^ ne fait pas parti de la trame ^
 
 0x00 		[45]			Taile de la trame en hexa 0x45 donc theoriquement 1+69 octets (la m20 est optimisée, les trames sont plus longues sur M10 et autre)
-0x01 		[20]			Identification du medèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
+0x01 		[20]			Identification du modèle (M10>0x9F, M2K2>0x8F, M10+>0xAF, la M20 c'est 0x20)
 0x02..0x03 	[0445]										<|
 0x04..0x05 	[EA2C]			Temperature ADC (je crois)	<|  Données de température et humidité apparement mais pas clair sur le code source de radiosonde_auto_rx
 0x06..0x07 	[B201]										<|
